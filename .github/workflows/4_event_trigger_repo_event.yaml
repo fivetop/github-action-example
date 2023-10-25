@@ -1,6 +1,6 @@
 ---
 name: PART3 - CH2 - Trigger when Push
-on:
+on: # Repository Event 기반 Trigger test- prefix 브랜치에 push하면 workflow start
   push:
     branches:
       - 'test-**'
