@@ -4,6 +4,9 @@ on: # Repository Event 기반 Trigger test- prefix 브랜치에 push하면 workf
   push:
     branches:
       - 'test-**'
+  #pull_request:
+  #fork:
+  #release:
 jobs:
   build:
     runs-on: ubuntu-latest
