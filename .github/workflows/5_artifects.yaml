@@ -21,6 +21,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: sample
-      - name: Print UUID
+      - name: Print Sample
         run: |
           echo "Artifacts: $(cat sample.txt)"
