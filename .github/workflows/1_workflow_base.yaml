@@ -1,0 +1,22 @@
+---
+name: PART3 - CH1 - Basic Sample        # Workflow의 이름
+on: workflow_dispatch                   # Workflow Event Trigger, workflow_dispatch는 수동 실행
+jobs:                                   # job 정의, 2개의 job이 정의됨
+  build:                                # job 1 : Build
+    runs-on: ubuntu-latest              # job runner, build 작업은 ubuntu-latest에서 실해오딤
+    steps:                              # build의 Step 3개
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build project
+      run: |
+        echo "Build Project"
+    - name: Run tests
+      run: |
+        echo "Run Test"
+  deploy:                                # job 2 : deploy
+    needs: build
+    runs-on: ubuntu-latest               # job runner, build 작업은 ubuntu-latest에서 실해오딤
+    steps:                               # build의 Step 1개
+    - name: Deploy to production
+      run: |
+        echo "Deploying to production server"
