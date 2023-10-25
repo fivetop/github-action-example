@@ -4,6 +4,9 @@ on: # Repository Event 기반 Trigger test- prefix 브랜치에 push하면 workf
   push:
     branches:
       - 'test-**'
+    paths-ignore: # 브랜치 해당되도 아래 코드는 제외
+      - 'README.md'
+      - '.github/workflows/**'
   #pull_request:
   #fork:
   #release:
