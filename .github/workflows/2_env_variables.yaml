@@ -23,7 +23,7 @@ jobs:
         run: |
           echo "Run Step 3, Make $fruit Juice!"
           echo "this step run by $GITHUB_ACTOR"
-          echo "this vars, {{ vars.PROJECT_NAME }},is defined on repository variables"
+          echo "this vars, ${{ vars.PROJECT_NAME }},is defined on repository variables"
   build_2:
     runs-on: ubuntu-latest
     steps:
