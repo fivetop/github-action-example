@@ -1,0 +1,27 @@
+---
+name: PART3 - CH3 - Select Runner
+on:
+  workflow_dispatch:
+    inputs: # 선택된 Runner로 실행 될 수 있도록 처리
+      os:
+        description: 'Runner OS'
+        required: true
+        default: 'ubuntu-latest'
+        type: choice
+        options:
+          - 'ubuntu-latest'
+          - 'windows-latest'
+          - 'macos-latest'
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ github.event.inputs.os }}
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v2
+      - id: run
+        name: Run
+        run: |
+          echo "OS: ${{ github.event.inputs.os}}"
+          echo "Hello World"
