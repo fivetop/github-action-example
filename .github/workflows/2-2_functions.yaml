@@ -1,0 +1,19 @@
+---
+name: PART3 - CH1 - Function 1
+# 실행 조건 : issue가 오픈되거나 수정되거나 라벨이 붙거나 때질때
+on:
+  issues:
+    types: [opened, edited, labeled, unlabeled]
+jobs:
+  # job 1
+  auto-assignee:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    # bug 라벨이 붙으면 이 job을 실행한다.
+    if: ${{ contains(github.event.issue.labels.*.name, 'bug') }}
+    steps:
+      - name: Auto assign issue
+        uses: pozil/auto-assign-issue@v1
+        with:
+          assignees: ${{ vars.BUG_HUNTERS }} # 이 담당자를 버그 담당자로 자동 할당
