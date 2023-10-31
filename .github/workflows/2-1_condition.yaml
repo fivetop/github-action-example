@@ -1,0 +1,15 @@
+---
+name: PART3 - CH1 - Condition 1
+on: workflow_dispatch
+jobs:
+  build:
+    if: github.repository == 'jihyungSong/github-action-course' # Github Action에서의 조건문 사용, false라면 이 job은 skip 된다.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1
+        run: |
+          echo "Run Step 1, Say Hello"
+      - name: Step 2
+        if: github.event_name == 'xxxxxxx' # Github Action에서의 조건문 사용, false라면 이 step은 skip 된다.
+        run: |
+          echo "Run Step 2, Say Hello"
