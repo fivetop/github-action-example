@@ -1,0 +1,9 @@
+name: Github-Action-With-Self-Hosted-Runner
+on: workflow_dispatch
+jobs:
+  WORK_ON_SELF_HOSTED:
+    name: self-hosted-work
+    runs-on: self-hosted
+    steps:
+      - name: test
+        run: echo "this step run on ${{github.workspace}}"
