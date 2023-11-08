@@ -14,7 +14,7 @@ jobs:
         name: Set Docker Environments
         run: |
               docker login ${{vars.raspberry_pi_docker_registry_url}} -u ${{secrets.raspberry_pi_docker_registry_user_name}} -p ${{secrets.raspberry_pi_docker_registry_password}}
-              docker build -f ./example-project/Dockerfile -t ${{vars.raspberry_pi_docker_registry_url}}/application:latest
+              docker build -f ./example-project/Dockerfile -t ${{vars.raspberry_pi_docker_registry_url}}/application:latest .
               docker push ${{vars.raspberry_pi_docker_registry_url}}/application:latest
   slack_notification:
     name: Image Publish Notification to Slack
