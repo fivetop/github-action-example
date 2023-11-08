@@ -1,0 +1,31 @@
+## Docker
+##
+name: Docker Image Build Test
+on: workflow_dispatch
+jobs:
+  build:
+    name: Build Jar Image
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout Repository
+        uses: actions/checkout@v3
+      - id: set-docker
+        name: Set Docker Environments
+        run: |
+              docker login -u ${{secrets.raspberry_pi_docker_registry_user_name}} -p ${{secrets.raspberry_pi_docker_registry_password}}
+              docker build -f ./example-project/Dockerfile -t ${{vars.rasberry_pi_docker_registry_url}}:latest
+              docker push ${{vars.raspberry_pi_docker_registry_url}}:latest
+  slack_notification:
+    name: Image Publish Notification to Slack
+    runs-on: ubuntu-latest
+    steps:
+      - id: slack-post
+        name: Slack Post
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          channel-id: 'github-action-test'
+          slack-message: |
+                            이미지 배포가 프로세스가 완료되었습니다
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
