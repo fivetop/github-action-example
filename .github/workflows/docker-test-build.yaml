@@ -19,6 +19,7 @@ jobs:
   slack_notification:
     name: Image Publish Notification to Slack
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - id: slack-post
         name: Slack Post
@@ -26,6 +27,7 @@ jobs:
         with:
           channel-id: 'github-action-test'
           slack-message: |
-                            이미지 배포가 프로세스가 완료되었습니다
+                            이미지 배포 프로세스가 완료되었습니다.
+                            - 성공 여부 : ${{job.status}}
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
