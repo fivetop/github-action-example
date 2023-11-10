@@ -28,6 +28,7 @@ jobs:
         with:
           report_path: "**/example-project/build/test-results/test/TEST-*.xml"
       - id : get-test-data
+        if: success() || failure()
         name: Get Test Output Data
         run: |
               echo "Total Count ${{ steps.test-aggregate.outputs.totalCount }}"
