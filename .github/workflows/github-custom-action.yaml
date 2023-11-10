@@ -19,6 +19,7 @@ jobs:
                 ./example-project/gradlew test -p ./example-project
       - id: test-aggregate
         name: Test Aggregate
+        if: success() || failure()
         uses: sis92345/junit-report-for-action@v1.1
         with:
           report_path: "./example-project/build/junit-test/TEST-*.xml"
