@@ -27,6 +27,7 @@ jobs:
         uses: sis92345/junit-report-for-action@v1.1
         with:
           report_path: "./example-project/build/junit-test/TEST-*.xml"
-      - name: Get Test Output Data
+      - id : get-test-data
+        name: Get Test Output Data
         run: |
               echo "Total Count ${{ steps.test-aggregate.outputs.totalCount }}"
