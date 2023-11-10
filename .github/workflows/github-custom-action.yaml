@@ -31,3 +31,6 @@ jobs:
         name: Get Test Output Data
         run: |
               echo "Total Count ${{ steps.test-aggregate.outputs.totalCount }}"
+      - name: Run tests
+        run: |
+            echo "Run Test"
