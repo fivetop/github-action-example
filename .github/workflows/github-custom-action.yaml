@@ -1,0 +1,26 @@
+## Docker
+##
+name: Docker Image Build Test
+on: workflow_dispatch
+jobs:
+  build:
+    name: Test
+    runs-on: self-hosted
+    steps:
+      - id: checkout
+        name: Checkout Repository
+        uses: actions/checkout@v3
+      - id: setup-gradle
+        name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - id: test
+        name: build-jar
+        run: |
+                ./example-project/gradlew test -p ./example-project
+      - id: test-aggregate
+        name: Test Aggregate
+        uses: sis92345/junit-report-for-action@v1.1
+        with:
+          report_path: "./example-project/build/junit-test/TEST-*.xml"
+      - name: Get Test Output Data
+        run: echo "The time was ${{ steps.test-aggregate.outputs.totalCount }}"

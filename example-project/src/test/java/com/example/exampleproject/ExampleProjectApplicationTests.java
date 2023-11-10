@@ -6,12 +6,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.*;
 
-@SpringBootTest
 class ExampleProjectApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void failTest() {
 			fail( "실패 테스트" );
+	}
+	
+	@Test
+	void successTest() {
+			assertThat( 1 ).isEqualTo( 1 );
 	}
 
 }
