@@ -5,11 +5,15 @@ on: workflow_dispatch
 jobs:
   build:
     name: Test
-    runs-on: self-hosted
+    runs-on: ubuntu
     steps:
       - id: checkout
         name: Checkout Repository
         uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
       - id: setup-gradle
         name: Setup Gradle
         uses: gradle/gradle-build-action@v2
@@ -24,4 +28,5 @@ jobs:
         with:
           report_path: "./example-project/build/junit-test/TEST-*.xml"
       - name: Get Test Output Data
-        run: echo "The time was ${{ steps.test-aggregate.outputs.totalCount }}"
+        run: |
+              echo "Total Count ${{ steps.test-aggregate.outputs.totalCount }}"
