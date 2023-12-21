@@ -31,7 +31,16 @@ jobs:
         if: success() || failure()
         name: Get Test Output Data
         run: |
-              echo "Total Count ${{ steps.test-aggregate.outputs.totalCount }}"
-      - name: Run tests
-        run: |
-            echo "Run Test"
+              echo "Total Test Count ${{ steps.test-aggregate.outputs.totalCount }}" 
+              echo "Total Passed Count ${{ steps.test-aggregate.outputs.passed }}" 
+              echo "Total Failed Count ${{ steps.test-aggregate.outputs.failed }}" 
+              echo "Total Skipped Count ${{ steps.test-aggregate.outputs.skkiped }}" 
+      - name: Post to a Slack Channel
+        id: slack-post
+        if: success() || failure()
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          channel-id: 'github-action-test'
+          slack-message: "Test Result\n🎫 Passed ${{ steps.test-aggregate.outputs.passed }}\n 𝍐 Passed ${{ steps.test-aggregate.outputs.failed }}\n ⏮Skipped ${{ steps.test-aggregate.outputs.skipped }} "
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
