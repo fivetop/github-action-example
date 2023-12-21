@@ -41,6 +41,6 @@ jobs:
         uses: slackapi/slack-github-action@v1.24.0
         with:
           channel-id: 'github-action-test'
-          slack-message: "Test Result\n🎫 Passed ${{ steps.test-aggregate.outputs.passed }}\n 𝍐 Passed ${{ steps.test-aggregate.outputs.failed }}\n ⏮Skipped ${{ steps.test-aggregate.outputs.skipped }} "
+          slack-message: "Test Result\n🟰Total : ${{ steps.test-aggregate.outputs.totalCount }}\n🎫 Passed : ${{ steps.test-aggregate.outputs.passed }}\n 𝍐 Failed : ${{ steps.test-aggregate.outputs.failed }}\n ⏮Skipped : ${{ steps.test-aggregate.outputs.skipped }} "
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
